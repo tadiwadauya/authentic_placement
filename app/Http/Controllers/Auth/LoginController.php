@@ -39,26 +39,30 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
    
-    public function login(Request $request)
-    {   
-        $input = $request->all();
-   
-        $this->validate($request, [
-            'email' => 'required|email',
-            'password' => 'required',
-        ]);
-   
-        if(auth()->attempt(array('email' => $input['email'], 'password' => $input['password'])))
-        {
-            if (auth()->user()->is_admin == 1) {
-                return redirect()->route('admin.home');
-            }else{
-                return redirect()->route('home');
-            }
-        }else{
-            return redirect()->route('login')
-                ->with('error','Email-Address And Password Are Wrong.');
+   public function login(Request $request)
+{   
+    $input = $request->all();
+
+    $this->validate($request, [
+        'email' => 'required|email',
+        'password' => 'required',
+    ]);
+
+    if (auth()->attempt(array('email' => $input['email'], 'password' => $input['password']))) {
+        $user = auth()->user();
+
+        if ($user->is_admin == 1) {
+            return redirect()->route('admin.home');
+        } else if ($user->is_admin == 2) {
+            return redirect()->route('superadmin.home');
+        } else if ($user->is_admin == 3) {
+            return redirect()->route('company.home');
+        } else {
+            return redirect()->route('home');
         }
-          
+    } else {
+        return redirect()->route('login')
+            ->with('error', 'Email-Address and Password are incorrect.');
     }
+}
 }

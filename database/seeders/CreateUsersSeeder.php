@@ -18,14 +18,26 @@ class CreateUsersSeeder extends Seeder
         $user = [
             [
                 'name' => 'Admin',
-                'email' => 'admin@onlinewebtutorblog.com',
+                'email' => 'admin@ap.com',
                 'is_admin' => '1',
                 'password' => bcrypt('123456'),
             ],
             [
                 'name' => 'User',
-                'email' => 'normal@onlinewebtutorblog.com',
+                'email' => 'normal@ap.com',
                 'is_admin' => '0',
+                'password' => bcrypt('123456'),
+            ],
+            [
+                'name' => 'SuperUser',
+                'email' => 'superadmin@ap.com',
+                'is_admin' => '2',
+                'password' => bcrypt('123456'),
+            ],
+            [
+                'name' => 'Company',
+                'email' => 'company@ap.com',
+                'is_admin' => '3',
                 'password' => bcrypt('123456'),
             ],
         ];
