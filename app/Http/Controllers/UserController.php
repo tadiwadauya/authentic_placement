@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use DB;
 use Hash;
+use App\Models\Category;
 use Illuminate\Support\Arr;
 use Illuminate\Validation\Rule;
 
@@ -18,9 +19,8 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $data = User::orderBy('id', 'DESC')->paginate(5);
-        return view('users.index', compact('data'))
-            ->with('i', ($request->input('page', 1) - 1) * 5);
+        $data = User::orderBy('id', 'DESC')->get();
+        return view('users.index', compact('data'));
     }
 
     /**
@@ -30,7 +30,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('users.create');
+        $categories = Category::latest()->get();
+        return view('users.create',compact('categories'));
     }
 
     /**
@@ -42,11 +43,23 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
+            'name' => ['required', 'string', 'max:255', 'unique:users'],
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
-            'phonenumber' => ['required', 'string', 'max:255', 'unique:users'],
-            'gender' => ['required', 'string', 'max:255'],
-            'city' => ['required', 'string', 'max:255'],
+            'email' => ['nullable', 'string', 'max:255'],
+            'phone' => ['required', 'string', 'max:255', 'unique:users'],
+            'gender' => ['nullable', 'string', 'max:255'],
+            'employer' => ['nullable', 'string', 'max:255'],
+            'address' => ['nullable', 'string', 'max:255'],
+            'location' => ['nullable', 'string', 'max:255'],
+            'website' => ['nullable', 'string', 'max:255'],
+            'description' => ['nullable', 'string'],
+            'cell' => ['nullable', 'string', 'max:255'],
+            'dob' => ['nullable', 'string', 'max:255'],
+            'category_id' => ['nullable', 'string', 'max:255'],
+            'speciality' => ['nullable', 'string', 'max:255'],
+            'position' => ['nullable', 'string', 'max:255'],
+            'salary' => ['nullable', 'string', 'max:255'],
             'is_admin' => ['required'],
             'password' => ['required', 'string', 'min:8'],
         ]);
@@ -58,8 +71,8 @@ class UserController extends Controller
     
         return redirect()->route('users.index')
                         ->with('success', 'User created successfully');
-    
     }
+    
 
     /**
      * Display the specified resource.
@@ -96,11 +109,23 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $validatedData = $request->validate([
+            'name' => ['required', 'string', 'max:255', 'unique:users'],
+            'email' => ['nullable', 'string', 'max:255'],
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
-            'phonenumber' => ['required', 'string', 'max:255', Rule::unique('users')->ignore($id)],
+            'phone' => ['required', 'string', 'max:255', Rule::unique('users')->ignore($id)],
+            'employer' => ['nullable', 'string', 'max:255'],
+            'address' => ['nullable', 'string', 'max:255'],
+            'location' => ['nullable', 'string', 'max:255'],
+            'website' => ['nullable', 'string', 'max:255'],
+            'description' => ['nullable', 'string'],
+            'cell' => ['nullable', 'string', 'max:255'],
+            'dob' => ['nullable', 'string', 'max:255'],
+            'Job_category_id' => ['nullable', 'string', 'max:255'],
+            'speciality' => ['nullable', 'string', 'max:255'],
+            'position' => ['nullable', 'string', 'max:255'],
+            'salary' => ['nullable', 'string', 'max:255'],
             'gender' => ['required', 'string', 'max:255'],
-            'city' => ['required', 'string', 'max:255'],
             'is_admin' => ['required', 'boolean'],
             'password' => ['nullable', 'string', 'min:8'],
         ]);
@@ -145,10 +170,23 @@ class UserController extends Controller
     public function registerstore(Request $request)
 {
     $validatedData = $request->validate([
+        'name' => ['required', 'string', 'max:255', 'unique:users'],
+        'email' => ['nullable', 'string', 'max:255'],
         'first_name' => ['required', 'string', 'max:255'],
         'last_name' => ['required', 'string', 'max:255'],
-        'phonenumber' => ['required', 'string', 'max:255', 'unique:users'],
+        'phone' => ['required', 'string', 'max:255', 'unique:users'],
         'gender' => ['required', 'string', 'max:255'],
+        'employer' => ['nullable', 'string', 'max:255'],
+        'address' => ['nullable', 'string', 'max:255'],
+        'location' => ['nullable', 'string', 'max:255'],
+        'website' => ['nullable', 'string', 'max:255'],
+        'description' => ['nullable', 'string'],
+        'cell' => ['nullable', 'string', 'max:255'],
+        'dob' => ['nullable', 'string', 'max:255'],
+        'Job_category_id' => ['nullable', 'string', 'max:255'],
+        'speciality' => ['nullable', 'string', 'max:255'],
+        'position' => ['nullable', 'string', 'max:255'],
+        'salary' => ['nullable', 'string', 'max:255'],
         'is_admin' => ['required', 'boolean'],
         'password' => ['required', 'string', 'min:8'],
     ]);

@@ -156,9 +156,10 @@
 									<div class="col-md-4">
                                         <div class="card card-bordered card-full">
                                             <div class="card-inner">
+                                                
                                                 <div class="card-title-group align-start mb-0">
                                                     <div class="card-title">
-                                                        <h1 class="subtitle">User Management</h1>
+                                                        <a class="subtitle" href="{{url('/users')}}">User Management </a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -169,7 +170,7 @@
                                             <div class="card-inner">
                                                 <div class="card-title-group align-start mb-0">
                                                     <div class="card-title">
-                                                        <h1 class="subtitle">User Management</h1>
+                                                    <a class="subtitle" href="{{url('/categories')}}">Job Categories</a>
                                                     </div>
                                                 </div>
                                             </div>

@@ -19,7 +19,23 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'first_name',
+        'last_name',
         'email',
+        'email',
+        'phone',
+        'gender',
+        'employer',
+        'address',
+        'location',
+        'website',
+        'description',
+        'cell',
+        'dob',
+        'category_id',
+        'speciality',
+        'position',
+        'salary',
         'password',
         'is_admin' // adding this
     ];
@@ -42,4 +58,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }

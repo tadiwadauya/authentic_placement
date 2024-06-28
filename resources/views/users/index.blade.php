@@ -21,10 +21,10 @@
 <div class="nk-content nk-content-fluid">
 <div class="card card-bordered card-preview">
     <div class="container">
-        @if ($message = Session::get('success'))
-<div class="alert alert-success">
-    <p>{{ $message }}</p>
-</div>
+@if (session()->has('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
 @endif
 <div class="card-inner">
     <div class="col-lg-12">
@@ -140,5 +140,7 @@
                 @endforeach
             </tbody>
         </table>
+        
     </div>
+    
 @endsection

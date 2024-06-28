@@ -28,7 +28,7 @@ return new class extends Migration
             $table->string('cell')->nullable();
             $table->string('gender')->nullable();
             $table->string('dob')->nullable();
-            $table->string('Job_category_id')->nullable();
+            $table->unsignedBigInteger('category_id')->nullable();
             $table->string('speciality')->nullable();
             $table->string('position')->nullable();
             $table->string('salary')->nullable();
@@ -37,6 +37,8 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+
+            
         });
     }
 
