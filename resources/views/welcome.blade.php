@@ -88,9 +88,12 @@
                 @endif
 
                 @if (Route::has('register'))
-                    <a class="btn-registration" href="{{ route('register') }}"><span>+</span> Register</a>
+                    <a class="btn-registration" href="{{ url('jobseeker/register') }}"><span>+</span>Jobseeker Register </a>
                 @endif
-                
+                @if (Route::has('register'))
+                    <a class="btn-registration" href="{{ url('employer/register') }}"><span>+</span>Employer Register </a>
+                @endif
+
               @else
               <a class="btn-registration btn-sm" href="#"  > {{ Auth::user()->name }} </a>
 

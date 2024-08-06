@@ -23,6 +23,19 @@ class UserController extends Controller
         return view('users.index', compact('data'));
     }
 
+    public function jobseekerindex(Request $request)
+    {
+        $data = User::where('is_admin', 0)->orderBy('id', 'DESC')->get();
+        return view('users.jobseeker.index', compact('data'));
+    }
+
+    public function employerindex(Request $request)
+    {
+        $data = User::where('is_admin', 3)->orderBy('id', 'DESC')->get();
+        return view('users.employer.index', compact('data'));
+    }
+
+
     /**
      * Show the form for creating a new resource.
      *
@@ -33,6 +46,34 @@ class UserController extends Controller
         $categories = Category::latest()->get();
         return view('users.create',compact('categories'));
     }
+
+    public function jobseekerregister()
+    {
+        $categories = Category::latest()->get();
+        return view('users.jobseeker.register',compact('categories'));
+    }
+
+    public function jobseekercreate()
+
+    {
+        $categories = Category::latest()->get();
+        return view('users.jobseeker.create',compact('categories'));
+    }
+
+    public function employerregister()
+    {
+        $categories = Category::latest()->get();
+        return view('users.employer.register',compact('categories'));
+    }
+
+
+    public function employercreate()
+
+    {
+        $categories = Category::latest()->get();
+        return view('users.employer.create',compact('categories'));
+    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -73,6 +114,136 @@ class UserController extends Controller
                         ->with('success', 'User created successfully');
     }
     
+
+    public function seekerstore(Request $request)
+    {
+        $validatedData = $request->validate([
+            'name' => ['required', 'string', 'max:255', 'unique:users'],
+            'first_name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
+            'email' => ['nullable', 'string', 'max:255'],
+            'gender' => ['nullable', 'string', 'max:255'],
+            'address' => ['nullable', 'string', 'max:255'],
+            'location' => ['nullable', 'string', 'max:255'],
+            'website' => ['nullable', 'string', 'max:255'],
+            'description' => ['nullable', 'string'],
+            'cell' => ['nullable', 'string', 'max:255'],
+            'dob' => ['nullable', 'string', 'max:255'],
+            'category_id' => ['nullable', 'string', 'max:255'],
+            'speciality' => ['nullable', 'string', 'max:255'],
+            'position' => ['nullable', 'string', 'max:255'],
+            'salary' => ['nullable', 'string', 'max:255'],
+            'is_admin' => ['required'],
+            'password' => ['required', 'string', 'min:8'],
+        ]);
+    
+        $input = $request->all();
+        $input['password'] = Hash::make($input['password']);
+    
+        $user = User::create($input);
+    
+        return redirect()->route('users.jobseeker.index')
+                        ->with('success', 'User created successfully');
+    }
+
+
+    public function jobseekerregstore(Request $request)
+    {
+        $validatedData = $request->validate([
+            'name' => ['required', 'string', 'max:255', 'unique:users'],
+            'first_name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
+            'email' => ['nullable', 'string', 'max:255'],
+            'gender' => ['nullable', 'string', 'max:255'],
+            'address' => ['nullable', 'string', 'max:255'],
+            'location' => ['nullable', 'string', 'max:255'],
+            'website' => ['nullable', 'string', 'max:255'],
+            'description' => ['nullable', 'string'],
+            'cell' => ['nullable', 'string', 'max:255'],
+            'dob' => ['nullable', 'string', 'max:255'],
+            'category_id' => ['nullable', 'string', 'max:255'],
+            'speciality' => ['nullable', 'string', 'max:255'],
+            'position' => ['nullable', 'string', 'max:255'],
+            'salary' => ['nullable', 'string', 'max:255'],
+            'is_admin' => ['required'],
+            'password' => ['required', 'string', 'min:8'],
+        ]);
+    
+        $input = $request->all();
+        $input['password'] = Hash::make($input['password']);
+    
+        $user = User::create($input);
+    
+        return redirect()->route('users.jobseeker.index')
+                        ->with('success', 'User created successfully');
+    }
+
+    
+    public function employerstore(Request $request)
+    {
+        $validatedData = $request->validate([
+            'name' => ['required', 'string', 'max:255', 'unique:users'],
+            'first_name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
+            'email' => ['nullable', 'string', 'max:255'],
+            'phone' => ['required', 'string', 'max:255', 'unique:users'],
+            'gender' => ['nullable', 'string', 'max:255'],
+            'employer' => ['nullable', 'string', 'max:255'],
+            'address' => ['nullable', 'string', 'max:255'],
+            'location' => ['nullable', 'string', 'max:255'],
+            'website' => ['nullable', 'string', 'max:255'],
+            'description' => ['nullable', 'string'],
+            'cell' => ['nullable', 'string', 'max:255'],
+            'dob' => ['nullable', 'string', 'max:255'],
+            'category_id' => ['nullable', 'string', 'max:255'],
+            'speciality' => ['nullable', 'string', 'max:255'],
+            'position' => ['nullable', 'string', 'max:255'],
+            'salary' => ['nullable', 'string', 'max:255'],
+            'is_admin' => ['required'],
+            'password' => ['required', 'string', 'min:8'],
+        ]);
+    
+        $input = $request->all();
+        $input['password'] = Hash::make($input['password']);
+    
+        $user = User::create($input);
+    
+        return redirect()->route('users.employer.index')
+                        ->with('success', 'User created successfully');
+    }
+
+    public function employerregstore(Request $request)
+    {
+        $validatedData = $request->validate([
+            'name' => ['required', 'string', 'max:255', 'unique:users'],
+            'first_name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
+            'email' => ['nullable', 'string', 'max:255'],
+            'phone' => ['required', 'string', 'max:255', 'unique:users'],
+            'gender' => ['nullable', 'string', 'max:255'],
+            'employer' => ['nullable', 'string', 'max:255'],
+            'address' => ['nullable', 'string', 'max:255'],
+            'location' => ['nullable', 'string', 'max:255'],
+            'website' => ['nullable', 'string', 'max:255'],
+            'description' => ['nullable', 'string'],
+            'cell' => ['nullable', 'string', 'max:255'],
+            'dob' => ['nullable', 'string', 'max:255'],
+            'category_id' => ['nullable', 'string', 'max:255'],
+            'speciality' => ['nullable', 'string', 'max:255'],
+            'position' => ['nullable', 'string', 'max:255'],
+            'salary' => ['nullable', 'string', 'max:255'],
+            'is_admin' => ['required'],
+            'password' => ['required', 'string', 'min:8'],
+        ]);
+    
+        $input = $request->all();
+        $input['password'] = Hash::make($input['password']);
+    
+        $user = User::create($input);
+    
+        return redirect()->route('users.employer.index')
+                        ->with('success', 'User created successfully');
+    }
 
     /**
      * Display the specified resource.

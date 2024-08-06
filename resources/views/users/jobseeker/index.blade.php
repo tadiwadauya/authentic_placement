@@ -32,7 +32,7 @@
                                             <div class="card-inner">
                                                 <div class="card-title-group align-start mb-3">
                                                     <div class="card-title">
-                                                        <h6 class="title">Users Overview</h6>
+                                                        <h6 class="title">jobseekers Overview</h6>
                                                       
                                                     </div>
                                                    
@@ -48,7 +48,7 @@
                                     
                                     <div class="nk-block-head-content">
                                         
-                                        <h3 class="nk-block-title page-title">User List</h3>
+                                        <h3 class="nk-block-title page-title">jobseekers List</h3>
                                        
                                     </div><!-- .nk-block-head-content -->
                                     <div class="nk-block-head-content">
@@ -56,16 +56,11 @@
                                             <a href="#" class="btn btn-icon btn-trigger toggle-expand me-n1" data-target="pageMenu"><em class="icon ni ni-more-v"></em></a>
                                             <div class="toggle-expand-content" data-content="pageMenu">
                                                 <ul class="nk-block-tools g-3">
+
                                                 <li>
-                                                    <a href=" {{ url('jobseeker/create')}}" class="btn btn-white btn-dim btn-outline-primary">
+                                                    <a href=" {{ url('jobseeker/create') }}" class="btn btn-white btn-dim btn-outline-primary">
                                                     <em class="icon ni ni-plus"></em>
-                                                        <span>Add Jobseeker</span>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href=" {{url('employer/create') }}" class="btn btn-white btn-dim btn-outline-primary">
-                                                    <em class="icon ni ni-plus"></em>
-                                                        <span>Add Employer</span>
+                                                        <span>Add</span>
                                                     </a>
                                                 </li>
                                                     <li><a href="{{ url('/admin/home')}}" class="btn btn-white btn-dim btn-outline-primary"><em class="icon ni ni-home"></em><span>Home</span></a></li>
@@ -74,9 +69,9 @@
                                                             <a href="#" class="dropdown-toggle btn btn-icon btn-primary" data-bs-toggle="dropdown"><em class="icon ni ni-plus"></em></a>
                                                             <div class="dropdown-menu dropdown-menu-end">
                                                                 <ul class="link-list-opt no-bdr">
-                                                                    <li><a href="{{ url('jobseeker/create') }}"> <em class="icon ni ni-plus-fill-c"></em><span>Add Jobseeker</span></a></li>
-                                                                    <li><a href="{{ url('employer/create') }}"> <em class="icon ni ni-plus-fill-c"></em><span>Add Employer</span></a></li>
-                                                                  
+                                                                    <li><a href="#"><em class="icon ni ni-list"></em><span>User list</span></a></li>
+                                                                    <li><a href="{{ url('jobseeker/create') }}">  <em class="icon ni ni-plus-fill-c"></em><span>Add Jobseeker</span></a></li>
+                                                                    <li><a href="{{ url('employeer/create') }}">  <em class="icon ni ni-plus-fill-c"></em><span>Add Employer</span></a></li> 
                                                                 </ul>
                                                             </div>
                                                         </div>

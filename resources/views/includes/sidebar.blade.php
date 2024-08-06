@@ -44,7 +44,13 @@
                                                 <a href="{{ url('users') }}" class="nk-menu-link"><span class="nk-menu-text">Users</span></a>
                                             </li>
                                             <li class="nk-menu-item">
-                                                <a href="html/user-list-compact.html" class="nk-menu-link"><span class="nk-menu-text">User List - Compact</span></a>
+                                                <a href="{{ url('users/create') }}" class="nk-menu-link"><span class="nk-menu-text">Add Users</span></a>
+                                            </li>
+                                            <li class="nk-menu-item">
+                                                <a href="{{ url('jobseeker') }}" class="nk-menu-link"><span class="nk-menu-text">Job Seeker</span></a>
+                                            </li>
+                                            <li class="nk-menu-item">
+                                                <a href="{{ url('jobseeker/create') }}" class="nk-menu-link"><span class="nk-menu-text">Add Job Seeker</span></a>
                                             </li>
                                             <li class="nk-menu-item">
                                                 <a href="html/user-details-regular.html" class="nk-menu-link"><span class="nk-menu-text">User Details - Regular</span></a>
@@ -91,24 +97,7 @@
                                                             <span class="language-name">English</span>
                                                         </a>
                                                     </li>
-                                                    <li>
-                                                        <a href="#" class="language-item">
-                                                            <img src="{{asset('admin/assets/images/flags/spanish.png')}}" alt="" class="language-flag">
-                                                            <span class="language-name">Español</span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#" class="language-item">
-                                                            <img src="{{asset('admin/assets/images/flags/french.png')}}" alt="" class="language-flag">
-                                                            <span class="language-name">Français</span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#" class="language-item">
-                                                            <img src="{{asset('admin/assets/images/flags/turkey.png')}}" alt="" class="language-flag">
-                                                            <span class="language-name">Türkçe</span>
-                                                        </a>
-                                                    </li>
+                                                   
                                                 </ul>
                                             </div>
                                         </div>

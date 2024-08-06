@@ -1,39 +1,94 @@
+<?php
+/**
+ * Created by Tadiwa Dauya
+ * Date: 21/01/2024
+ * Time: 12:58 PM
+ */
+?>
+
 @extends('layouts.admin.app')
 
 @section('content')
-<div class="nk-app-root">
-        <!-- main @s -->
-        <div class="nk-main ">
-            <!-- wrap @s -->
-            <div class="nk-wrap nk-wrap-nosidebar">
-                <!-- content @s -->
-                <div class="nk-content ">
-                <body class="img js-fullheight" style="background-image: url('{{asset('assets/front/img/banner/s_slider_bg.jpg')}}');">
-                    <div class="nk-block nk-block-middle nk-auth-body  wide-xs">
-                        
-                        <div class="card card-bordered">
-                            <div class="card-inner card-inner-lg">
-                                <div class="nk-block-head">
-                                    <div class="nk-block-head-content">
-                                    <div class="brand-logo pb-4 text-center">
-                            <a href="html/index.html" class="logo-link">
-                                <img class="logo-light logo-img logo-img-lg" src="{{asset('assets/admin/assets/images/logo.png')}}" srcset="{{asset('admin/assets/images/logo2x.png')}} 2x" alt="logo">
-                                <img class="logo-dark logo-img logo-img-lg" src="{{asset('assets/admin/assets/images/logo-dark.png')}}" srcset="{{asset('admin/assets/images/logo-dark.png')}} 2x" alt="logo-dark">
-                            </a>
-                        </div>
-                                        <h4 class="nk-block-title">Register</h4>
-                                        @if(session('error'))
-    <div class="alert alert-danger">
-        {{ session('error') }}
+@if(auth()->check())
+    @include('includes.sidebar')
+@endif
+
+<div class="nk-wrap ">
+@if(auth()->check())
+    @include('includes.nav')
+@endif
+
+<div class="nk-content nk-content-fluid">
+<div class="card card-bordered card-preview">
+    <div class="container">
+    @if (session()->has('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
     </div>
 @endif
-                                        <div class="nk-block-des">
-                                            <p>Fill in the form to become a member and download for free</p>
+
+<div class="card-inner">
+    <div class="col-lg-12">
+                                       
+                                            <div class="card-inner">
+                                                <div class="card-title-group align-start mb-3">
+                                                    <div class="card-title">
+                                                        <h6 class="title">Creating A Jobseeker Account</h6>
+                                                      
+                                                    </div>
+                                                   
+                                                </div><!-- .card-title-group -->
+                                               
+                                       
+                                    </div><!-- .col -->
+                                            <div class="preview-block">
+                                            <div class="nk-content-body">
+                                                
+                            <div class="nk-block-head nk-block-head-sm">
+                                <div class="nk-block-between">
+                                    
+                                    <div class="nk-block-head-content">
+                                        
+                                        <h3 class="nk-block-title page-title">Add User</h3>
+                                       
+                                    </div><!-- .nk-block-head-content -->
+                                    <div class="nk-block-head-content">
+                                        <div class="toggle-wrap nk-block-tools-toggle">
+                                            <a href="#" class="btn btn-icon btn-trigger toggle-expand me-n1" data-target="pageMenu"><em class="icon ni ni-more-v"></em></a>
+                                            <div class="toggle-expand-content" data-content="pageMenu">
+                                                <ul class="nk-block-tools g-3">
+
+                                                <li>
+                                                    <a href=" {{ route('users.create') }}" class="btn btn-white btn-dim btn-outline-primary">
+                                                    <em class="icon ni ni-plus"></em>
+                                                        <span>Add</span>
+                                                    </a>
+                                                </li>
+                                                    <li><a href="{{ url('/admin/home')}}" class="btn btn-white btn-dim btn-outline-primary"><em class="icon ni ni-home"></em><span>Home</span></a></li>
+                                                    <li class="nk-block-tools-opt">
+                                                        <div class="drodown">
+                                                            <a href="#" class="dropdown-toggle btn btn-icon btn-primary" data-bs-toggle="dropdown"><em class="icon ni ni-plus"></em></a>
+                                                            <div class="dropdown-menu dropdown-menu-end">
+                                                                <ul class="link-list-opt no-bdr">
+                                                                    <li><a href="#"><em class="icon ni ni-list"></em><span>User list</span></a></li>
+                                                                    <li><a href="{{ route('users.create') }}">  <em class="icon ni ni-plus-fill-c"></em><span>Add User</span></a></li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                <div class="card-body">
-                @if (count($errors) > 0)
+                                    </div><!-- .nk-block-head-content -->
+                                </div><!-- .nk-block-between -->
+                                
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                        
+        @if (count($errors) > 0)
     <div class="alert alert-danger">
         <strong>Whoops!</strong> There were some problems with your input.<br><br>
         <ul>
@@ -43,9 +98,8 @@
         </ul>
     </div>
 @endif
-                <form method="POST" action="{{ route('register') }}">
+<form action="{{ route('users.seekerstore') }}" method="POST">
     @csrf
-
     <div class="row">
         <div class="col">
             <div class="form-group">
@@ -175,31 +229,19 @@
             </div>
         </div>
         <div class="col">
-        <div class="col-md-6">
-            <label for="password" class="form-label">{{ __('Password') }}</label>
-            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-            @error('password')
-                <div class="invalid-feedback">
-                    {{ $message }}
-                </div>
-            @enderror
-        </div>
-
-        <div class="col-md-6">
-            <label for="password-confirm" class="form-label">{{ __('Confirm Password') }}</label>
-            <input id="password_confirmation" type="password" class="form-control" name="password_confirmation" required>
-        </div>
-        </div>
-    </div>
-<br> 
-    <button type="submit" class="btn btn-primary">Register</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" name="password" required>
             </div>
         </div>
     </div>
- </div>
+<br> 
+    <button type="submit" class="btn btn-primary">Create User</button>
+</form>
+    </div>
+</div>
+</div>
+</div>
+</div>
 </div>
 @endsection
